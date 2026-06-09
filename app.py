@@ -1,5 +1,6 @@
 from flask import Flask
 import psycopg2
+import os
 
 app = Flask(__name__)
 
@@ -7,11 +8,11 @@ app = Flask(__name__)
 def home():
 
     conn = psycopg2.connect(
-        host="db",
-        database="companydb",
-        user="admin",
-        password="admin123"
-    )
+    host=os.getenv("DB_HOST"),
+    database=os.getenv("DB_NAME"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD")
+)
 
     cur = conn.cursor()
 
